@@ -43,7 +43,7 @@ nav a:hover {
   color: #e67e22;
 }
 
-    .dark {
+   .dark {
   background-color: #1e1e1e;
   color: #f5f5f5;
 }
@@ -94,11 +94,10 @@ if(localStorage.getItem("darkMode") === "enabled") {
 // Aseta nappiin oikea teksti heti sivun latautuessa
 toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
 
-// Napin klikkauksessa vaihdetaan tila ja teksti
+// Napin klikkauksessa vaihdetaan tila ja tallennetaan localStorageen
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
-  // Päivitä localStorage
   if(document.body.classList.contains("dark")) {
     localStorage.setItem("darkMode", "enabled");
   } else {
@@ -115,6 +114,7 @@ toggle.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
