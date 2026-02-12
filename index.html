@@ -5,133 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etunimi Sukunimi – Portfolio</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-  <!-- Tyylit -->
   <style>
-    body { 
-      font-family: 'Roboto', sans-serif; 
-      background-color: #fdfdfd; 
-      line-height: 1.6; 
-      max-width: 800px; 
-      margin: auto; 
-      padding: 20px; 
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
     }
+
+    /* ===== GIF TAUSTA ===== */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://cdn.pixabay.com/animation/2025/03/20/12/36/12-36-43-318_512.gif") center/cover no-repeat;
+      z-index: -2;
+      filter: brightness(0.45);
+    }
+
+    /* ===== LASIKORTTI ===== */
+    .content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .dark .content {
+      background: rgba(30,30,30,0.85);
+      color: #f5f5f5;
+    }
+
     h1, h2 { color: #34495e; }
+    .dark h1, .dark h2 { color: #ffffff; }
+
     a { color: #e67e22; }
-    a:hover { text-decoration: underline; }
+    .dark a { color: #f39c12; }
+
     hr { margin: 30px 0; }
 
-  
+    /* ===== NAV ===== */
     nav {
-  display: flex;
-  gap: 25px;
-  padding: 15px 0;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 40px;
-}
+      display: flex;
+      gap: 25px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
 
-nav a {
-  text-decoration: none;
-  font-weight: 500;
-  color: #34495e;
-  transition: 0.2s;
-}
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: inherit;
+      transition: 0.2s;
+    }
 
-nav a:hover {
-  color: #e67e22;
-}
+    nav a:hover {
+      color: #e67e22;
+    }
 
     nav a.active {
-  border-bottom: 2px solid #e67e22;
-  padding-bottom: 4px;
-}
+      border-bottom: 2px solid #e67e22;
+      padding-bottom: 4px;
+    }
 
+    /* ===== BUTTON ===== */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
 
-/* Dark mode tyylit */
-.dark {
-  background-color: #1e1e1e;
-  color: #f5f5f5;
-}
+    body:not(.dark) .button {
+      background-color: #e67e22;
+      color: white;
+    }
 
-.dark a { 
-  color: #f39c12; 
-}
+    body.dark .button {
+      background-color: #34495e;
+      color: white;
+    }
 
-.dark a:hover { 
-  text-decoration: underline; 
-}
-
-/* Korttien taustat dark modeen, jos käytät kortteja */
-.dark .contact-card, 
-.dark .project-card {
-  background: #2c2c2c;
-}
-
-/* Button värit light/dark tilaan */
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-top: 10px;
-  transition: 0.3s;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-/* Light mode */
-body:not(.dark) .button {
-  background-color: #e67e22;
-  color: white;
-}
-
-/* Dark mode */
-body.dark .button {
-  background-color: #34495e;
-  color: white;
-}
-
-.button:hover {
-  filter: brightness(0.9);
-}
-
-
+    .button:hover {
+      filter: brightness(0.9);
+    }
 
   </style>
-
 </head>
 <body>
 
- <nav>
+<div class="background"></div>
+
+<div class="content">
+
+<nav>
   <a href="index.html">Etusivu</a>
   <a href="about.html">Minusta</a>
   <a href="projects.html">Projektit</a>
   <a href="contact.html">Yhteystiedot</a>
 </nav>
 
-   <!-- Dark mode -nappi -->
-  <button id="theme-toggle" class="button">Vaihda teema</button>
-  
+<button id="theme-toggle" class="button">Vaihda teema</button>
 
 <h1>Etunimi Sukunimi</h1>
-<img src="https://images.unsplash.com/photo-1662385406679-5f6efa690e46?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Banner" style="width:100%; height:auto; margin-bottom:20px;">
-<p>Opiskelen sosionomiksi, kiinnostuksen kohteeni ovat ihmisten hyvinvointi, yhteiskunta ja vuorovaikutus.</p>
-<div style="clear:both;"></div> <!-- varmistaa, että seuraava sisältö ei mene kuvan päälle -->
+
+<img src="https://images.unsplash.com/photo-1662385406679-5f6efa690e46?q=80&w=1332&auto=format&fit=crop"
+     alt="Banner"
+     style="width:100%; height:auto; margin-bottom:20px; border-radius:10px;">
+
+<p>
+Opiskelen sosionomiksi, kiinnostuksen kohteeni ovat ihmisten hyvinvointi,
+yhteiskunta ja vuorovaikutus.
+</p>
+
 <hr>
+
+</div>
 
 <script>
 const toggle = document.getElementById("theme-toggle");
 
-// Tarkista localStorage kun sivu latautuu
+// Dark mode tallennus
 if(localStorage.getItem("darkMode") === "enabled") {
   document.body.classList.add("dark");
 }
 
-// Aseta nappiin oikea teksti heti sivun latautuessa
-toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
+toggle.textContent = document.body.classList.contains("dark")
+  ? "Vaihda vaaleaksi ☀️"
+  : "Vaihda tummaksi 🌙";
 
-// Napin klikkauksessa vaihdetaan tila ja tallennetaan localStorageen
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
@@ -141,11 +155,11 @@ toggle.addEventListener("click", () => {
     localStorage.setItem("darkMode", "disabled");
   }
 
-  // Päivitä nappiin teksti ja emoji
-  toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
+  toggle.textContent = document.body.classList.contains("dark")
+    ? "Vaihda vaaleaksi ☀️"
+    : "Vaihda tummaksi 🌙";
 });
 </script>
-
 
 <script>
 const currentPage = window.location.pathname.split("/").pop();
@@ -158,11 +172,10 @@ navLinks.forEach(link => {
 });
 </script>
 
-
-
-
 </body>
 </html>
+
+
 
 
 
