@@ -92,7 +92,7 @@ if(localStorage.getItem("darkMode") === "enabled") {
 }
 
 // Aseta nappiin oikea teksti heti sivun latautuessa
-toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
+toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
 
 // Napin klikkauksessa vaihdetaan tila ja tallennetaan localStorageen
 toggle.addEventListener("click", () => {
@@ -104,16 +104,18 @@ toggle.addEventListener("click", () => {
     localStorage.setItem("darkMode", "disabled");
   }
 
-  // Päivitä nappiin teksti
-  toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
+  // Päivitä nappiin teksti ja emoji
+  toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
 });
 </script>
 
 
 
 
+
 </body>
 </html>
+
 
 
 
