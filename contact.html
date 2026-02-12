@@ -111,7 +111,7 @@ nav a.active {
       visibility: visible;
       opacity: 1;
     }
-
+    
 .button {
   display: inline-block;
   padding: 10px 20px;
@@ -137,6 +137,30 @@ body.dark .button {
 .button:hover {
   filter: brightness(0.9);
 }
+
+    .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+
+.dark .contact-form input,
+.dark .contact-form textarea {
+  background: #2c2c2c;
+  color: white;
+  border: 1px solid #444;
+}
+
+    
   </style>
 </head>
 <body>
@@ -170,6 +194,16 @@ body.dark .button {
   </div>
 </div>
 
+<h2>Lähetä viesti</h2>
+
+<form class="contact-form">
+  <input type="text" placeholder="Nimi" required>
+  <input type="email" placeholder="Sähköposti" required>
+  <textarea placeholder="Viesti..." rows="5" required></textarea>
+  <button type="submit" class="button">Lähetä</button>
+</form>
+
+  
 <script>
 const toggle = document.getElementById("theme-toggle");
 
