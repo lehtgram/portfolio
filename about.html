@@ -42,7 +42,7 @@ nav a:hover {
   color: #e67e22;
 }
 
-    .dark {
+.dark {
   background-color: #1e1e1e;
   color: #f5f5f5;
 }
@@ -58,6 +58,7 @@ nav a:hover {
 .dark .contact-card {
   background: #2c2c2c;
 }
+
 
 
   </style>
@@ -83,7 +84,7 @@ nav a:hover {
 <p>Lyhyt kuvaus itsestäsi, kiinnostuksistasi ja arvoistasi.</p>
 <hr>
 
-   <script>
+<script>
 const toggle = document.getElementById("theme-toggle");
 
 // Tarkista localStorage kun sivu latautuu
@@ -94,11 +95,10 @@ if(localStorage.getItem("darkMode") === "enabled") {
 // Aseta nappiin oikea teksti heti sivun latautuessa
 toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
 
-// Napin klikkauksessa vaihdetaan tila ja teksti
+// Napin klikkauksessa vaihdetaan tila ja tallennetaan localStorageen
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
-  // Päivitä localStorage
   if(document.body.classList.contains("dark")) {
     localStorage.setItem("darkMode", "enabled");
   } else {
