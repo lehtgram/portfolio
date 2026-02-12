@@ -43,6 +43,19 @@ nav a:hover {
   color: #e67e22;
 }
 
+    .dark {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.dark a {
+  color: #f39c12;
+}
+
+.dark a:hover {
+  text-decoration: underline;
+}
+
 
   </style>
 
@@ -55,6 +68,9 @@ nav a:hover {
   <a href="projects.html">Projektit</a>
   <a href="contact.html">Yhteystiedot</a>
 </nav>
+
+   <!-- Dark mode -nappi -->
+  <button id="theme-toggle" class="button">Vaihda teema</button>
   
 
 <h1>Etunimi Sukunimi</h1>
@@ -63,9 +79,17 @@ nav a:hover {
 <div style="clear:both;"></div> <!-- varmistaa, että seuraava sisältö ei mene kuvan päälle -->
 <hr>
 
+  <script>
+const toggle = document.getElementById("theme-toggle");
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+</script>
+
 
 </body>
 </html>
+
 
 
 
