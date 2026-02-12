@@ -64,6 +64,32 @@
   background: #2c2c2c;
 }
 
+    .contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.contact-card {
+  flex: 1 1 250px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.dark .contact-card {
+  background: #2c2c2c;
+}
+
+
 
 
   </style>
@@ -87,10 +113,17 @@
 
 <h1>Yhteystiedot</h1>
 
-<div class="contact-info">
-  <p>Email: <a href="mailto:nimi@email.fi">nimi@email.fi</a></p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/etunimi-sukunimi" target="_blank">linkedin.com/in/etunimi-sukunimi</a></p>
+<div class="contact-cards">
+  <div class="contact-card">
+    <strong>Email</strong>
+    <p><a href="mailto:nimi@email.fi">nimi@email.fi</a></p>
+  </div>
+  <div class="contact-card">
+    <strong>LinkedIn</strong>
+    <p><a href="https://www.linkedin.com/in/etunimi-sukunimi" target="_blank">linkedin.com/in/etunimi-sukunimi</a></p>
+  </div>
 </div>
+
 
   
 <script>
