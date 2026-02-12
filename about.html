@@ -42,7 +42,7 @@ nav a:hover {
   color: #e67e22;
 }
 
-      .dark {
+    .dark {
   background-color: #1e1e1e;
   color: #f5f5f5;
 }
@@ -53,6 +53,10 @@ nav a:hover {
 
 .dark a:hover {
   text-decoration: underline;
+}
+
+.dark .contact-card {
+  background: #2c2c2c;
 }
 
 
@@ -68,7 +72,7 @@ nav a:hover {
   <a href="contact.html">Yhteystiedot</a>
 </nav>
 
-    <!-- Dark mode -nappi -->
+   <!-- Dark mode -nappi -->
   <button id="theme-toggle" class="button">Vaihda teema</button>
   
 <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Banner" style="width:100%; height:auto; margin-bottom:20px;">
@@ -79,10 +83,30 @@ nav a:hover {
 <p>Lyhyt kuvaus itsestäsi, kiinnostuksistasi ja arvoistasi.</p>
 <hr>
 
-    <script>
+   <script>
 const toggle = document.getElementById("theme-toggle");
+
+// Tarkista localStorage kun sivu latautuu
+if(localStorage.getItem("darkMode") === "enabled") {
+  document.body.classList.add("dark");
+}
+
+// Aseta nappiin oikea teksti heti sivun latautuessa
+toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
+
+// Napin klikkauksessa vaihdetaan tila ja teksti
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
+
+  // Päivitä localStorage
+  if(document.body.classList.contains("dark")) {
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    localStorage.setItem("darkMode", "disabled");
+  }
+
+  // Päivitä nappiin teksti
+  toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi" : "Vaihda tummaksi";
 });
 </script>
 
