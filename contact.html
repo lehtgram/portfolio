@@ -138,7 +138,7 @@ body.dark .button {
   filter: brightness(0.9);
 }
 
-    .contact-form {
+.contact-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -159,6 +159,7 @@ body.dark .button {
   color: white;
   border: 1px solid #444;
 }
+
 
     
   </style>
@@ -196,12 +197,13 @@ body.dark .button {
 
 <h2>Lähetä viesti</h2>
 
-<form class="contact-form">
-  <input type="text" placeholder="Nimi" required>
-  <input type="email" placeholder="Sähköposti" required>
-  <textarea placeholder="Viesti..." rows="5" required></textarea>
+<form action="https://formspree.io/f/mzdaezyg" method="POST" class="contact-form">
+  <input type="text" name="name" placeholder="Nimi" required>
+  <input type="email" name="email" placeholder="Sähköposti" required>
+  <textarea name="message" placeholder="Viesti..." rows="5" required></textarea>
   <button type="submit" class="button">Lähetä</button>
 </form>
+
 
   
 <script>
