@@ -13,49 +13,54 @@
       margin: 0;
       font-family: 'Roboto', sans-serif;
       line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
     }
 
-    /* ===== GIF TAUSTA ===== */
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url("https://cdn.pixabay.com/animation/2025/03/20/12/36/12-36-43-318_512.gif") center/cover no-repeat;
-      z-index: -2;
-      filter: brightness(0.45);
-    }
-
-    /* ===== LASIKORTTI ===== */
+    /* Lasikortti */
     .content {
       max-width: 900px;
-      margin: 40px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(12px);
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
       border-radius: 14px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     }
 
-    .dark .content {
-      background: rgba(30,30,30,0.85);
+    .dark {
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
       color: #f5f5f5;
     }
 
-    h1, h2 { color: #34495e; }
-    .dark h1, .dark h2 { color: #ffffff; }
+    .dark .content {
+      background: rgba(30,30,30,0.9);
+    }
 
-    a { color: #e67e22; }
-    .dark a { color: #f39c12; }
+    h1, h2 {
+      color: #34495e;
+    }
 
-    hr { margin: 30px 0; }
+    .dark h1, .dark h2 {
+      color: #ffffff;
+    }
 
-    /* ===== NAV ===== */
+    a {
+      color: #e67e22;
+    }
+
+    .dark a {
+      color: #f39c12;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    /* NAV */
     nav {
       display: flex;
       gap: 25px;
-      padding: 15px 0;
+      padding-bottom: 15px;
       border-bottom: 1px solid rgba(0,0,0,0.1);
       margin-bottom: 40px;
     }
@@ -76,7 +81,7 @@
       padding-bottom: 4px;
     }
 
-    /* ===== BUTTON ===== */
+    /* Button */
     .button {
       display: inline-block;
       padding: 10px 20px;
@@ -105,8 +110,6 @@
   </style>
 </head>
 <body>
-
-<div class="background"></div>
 
 <div class="content">
 
@@ -174,7 +177,6 @@ navLinks.forEach(link => {
 
 </body>
 </html>
-
 
 
 
