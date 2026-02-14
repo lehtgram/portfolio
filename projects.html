@@ -116,12 +116,17 @@ body.dark .button { background-color: #34495e; color: white; }
   margin-bottom: 15px;
 }
 
-    .projects-image {
-  width: 100%;
-  height: auto;
+  .projects-image {
+  width: 60%;        /* Kuva vie nyt 60% kortin leveydestä */
+  max-width: 400px;  /* Maksimi leveys */
+  height: auto;      /* Säilyttää kuvasuhteen */
   border-radius: 8px;
   margin-bottom: 16px;
+  display: block;    /* Estää muiden elementtien päällekkäisyyden */
+  margin-left: auto; /* Keskittää kuvan vaakasuunnassa */
+  margin-right: auto;
 }
+
 
   </style>
 </head>
