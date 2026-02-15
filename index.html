@@ -126,6 +126,28 @@
   pointer-events: none;
 }
 
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
   </style>
 </head>
 <body>
@@ -143,10 +165,13 @@
 
 <h1>Leevi Holmström</h1>
 
+  <div class="image-wrapper">
 <img src="images/me.jpg"
      alt="Minä"
      style="width:100%; height:auto; margin-bottom:20px; border-radius:10px;">
-
+ <span class="watermark">© Leevi</span>
+</div>
+  
 <p>Opiskelen sosionomiksi ja kiinnostukseni kohdistuvat ihmisten hyvinvointiin, vuorovaikutukseen sekä yhteiskunnallisiin ilmiöihin.</p>
 
 <p>Vapaa-ajalla teen luovia ja teknisiä projekteja, kuten valokuvausta ja verkkosivujen rakentelua.</p>
@@ -158,6 +183,7 @@
   <footer class="footer">
   <p>© 2026 Leevi Holmström — Kaikki oikeudet pidätetään.</p>
 </footer>
+
 
 </div>
 
@@ -201,6 +227,7 @@ navLinks.forEach(link => {
 
 </body>
 </html>
+
 
 
 
