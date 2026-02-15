@@ -203,6 +203,28 @@ body.dark .button {
   pointer-events: none;
 }
 
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
   </style>
 </head>
 <body>
@@ -219,8 +241,11 @@ body.dark .button {
 <!-- Dark mode -nappi -->
 <button id="theme-toggle" class="button">Vaihda tummaksi 🌙</button>
 
+    <div class="image-wrapper">
 <img src="images/autumn.jpg">
-
+ <span class="watermark">© Leevi</span>
+</div>
+  
 <h2>LinkedIn</h2>
 
   <div class="contact-card tooltip">
