@@ -164,6 +164,9 @@
   <a href="contact.html">Yhteystiedot</a>
 </nav>
 
+<button id="lang-toggle" class="button">🇬🇧 English</button>
+
+  
 <button id="theme-toggle" class="button">Vaihda teema</button>
 
 <h1>Leevi Holmström</h1>
@@ -228,8 +231,55 @@ navLinks.forEach(link => {
 });
 </script>
 
+  <script>
+const langToggle = document.getElementById("lang-toggle");
+
+// Määrittele kieliversioiden URLit
+const langMap = {
+  "index.html": "en_index.html",
+  "about.html": "en_about.html",
+  "projects.html": "en_projects.html",
+  "contact.html": "en_contact.html",
+  "en_index.html": "index.html",
+  "en_about.html": "about.html",
+  "en_projects.html": "projects.html",
+  "en_contact.html": "contact.html"
+};
+
+// Määrittele liput ja tekstit
+const langLabels = {
+  "fi": "🇫🇮 Suomi",
+  "en": "🇬🇧 English"
+};
+
+// Tarkista localStorage kun sivu latautuu
+let savedLang = localStorage.getItem("lang") || "fi";
+updateButton(savedLang);
+
+// Klikattaessa vaihdetaan kieli
+langToggle.addEventListener("click", () => {
+  const currentPage = window.location.pathname.split("/").pop();
+  const nextPage = langMap[currentPage];
+
+  if (nextPage) {
+    // Päivitä localStorage ennen sivunvaihtoa
+    const newLang = savedLang === "fi" ? "en" : "fi";
+    localStorage.setItem("lang", newLang);
+
+    // Vaihda sivua
+    window.location.href = nextPage;
+  }
+});
+
+// Päivittää napin tekstin/lipun
+function updateButton(lang) {
+  langToggle.textContent = langLabels[lang];
+}
+</script>
+
 </body>
 </html>
+
 
 
 
