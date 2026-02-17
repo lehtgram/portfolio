@@ -199,7 +199,7 @@
 
   <!-- Kieli -->
   <div id="lang-toggle-wrapper">
-    <button id="lang-toggle" class="button"></button>
+    <button id="lang-toggle" class="button">Loading...</button>
     <span id="lang-tooltip">Vaihda sivun kieli</span>
   </div>
 </div>
@@ -271,39 +271,41 @@ navLinks.forEach(link => {
 </script>
 
  <script>
-const langToggle = document.getElementById("lang-toggle");
+document.addEventListener("DOMContentLoaded", () => {
+  const langToggle = document.getElementById("lang-toggle");
 
-// Kieliversiot
-const langMap = {
-  "index.html": "en_index.html",
-  "about.html": "en_about.html",
-  "projects.html": "en_projects.html",
-  "contact.html": "en_contact.html",
-  "en_index.html": "index.html",
-  "en_about.html": "about.html",
-  "en_projects.html": "projects.html",
-  "en_contact.html": "contact.html"
-};
+  // Kieliversiot
+  const langMap = {
+    "index.html": "en_index.html",
+    "about.html": "en_about.html",
+    "projects.html": "en_projects.html",
+    "contact.html": "en_contact.html",
+    "en_index.html": "index.html",
+    "en_about.html": "about.html",
+    "en_projects.html": "projects.html",
+    "en_contact.html": "contact.html"
+  };
 
-// Näkyvä kieli napissa: aina se johon mennään
-const langLabels = {
-  "fi": "🇬🇧 English", 
-  "en": "🇫🇮 Suomi"
-};
+  // Näkyvä kieli napissa: aina se, johon mennään
+  const langLabels = {
+    "fi": "🇬🇧 English",
+    "en": "🇫🇮 Suomi"
+  };
 
-// Selvitä nykyinen kieli URL:sta
-const currentPage = window.location.pathname.split("/").pop();
-let currentLang = currentPage.startsWith("en_") ? "en" : "fi";
+  // Selvitä nykyinen sivu ja kieli
+  const currentPage = window.location.pathname.split("/").pop();
+  let currentLang = currentPage.startsWith("en_") ? "en" : "fi";
 
-// Päivitä napin teksti
-langToggle.textContent = langLabels[currentLang];
+  // Päivitä napin teksti
+  langToggle.textContent = langLabels[currentLang];
 
-// Klikattaessa vaihdetaan kieli
-langToggle.addEventListener("click", () => {
-  const nextPage = langMap[currentPage];
-  if(nextPage) {
-    window.location.href = nextPage;
-  }
+  // Vaihda kieli klikkauksella
+  langToggle.addEventListener("click", () => {
+    const nextPage = langMap[currentPage];
+    if (nextPage) {
+      window.location.href = nextPage;
+    }
+  });
 });
 
 
