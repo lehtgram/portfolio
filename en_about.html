@@ -8,88 +8,107 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-<style>
+  <style>
 
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
-  background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
-}
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
+    }
 
-/* Glass card */
-.content {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 40px;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-}
+    /* Lasikortti */
+    .content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
 
-.dark {
-  background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
-  color: #f5f5f5;
-}
+    .dark {
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+      color: #f5f5f5;
+    }
 
-.dark .content {
-  background: rgba(30,30,30,0.9);
-}
+    .dark .content {
+      background: rgba(30,30,30,0.9);
+    }
 
-h1, h2 { color: #34495e; }
-.dark h1, .dark h2 { color: #ffffff; }
+    h1, h2 {
+      color: #34495e;
+    }
 
-a { color: #e67e22; }
-.dark a { color: #f39c12; }
+    .dark h1, .dark h2 {
+      color: #ffffff;
+    }
 
-hr { margin: 30px 0; }
+    a {
+      color: #e67e22;
+    }
 
-/* NAV */
-nav {
-  display: flex;
-  gap: 25px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  margin-bottom: 40px;
-}
+    .dark a {
+      color: #f39c12;
+    }
 
-nav a {
-  text-decoration: none;
-  font-weight: 500;
-  color: inherit;
-}
+    hr {
+      margin: 30px 0;
+    }
 
-nav a:hover { color: #e67e22; }
+    /* NAV */
+    nav {
+      display: flex;
+      gap: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
 
-nav a.active {
-  border-bottom: 2px solid #e67e22;
-  padding-bottom: 4px;
-}
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: inherit;
+      transition: 0.2s;
+    }
 
-/* Buttons */
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
-  border: none;
-}
+    nav a:hover {
+      color: #e67e22;
+    }
 
-body:not(.dark) .button {
-  background-color: #e67e22;
-  color: white;
-}
+    nav a.active {
+      border-bottom: 2px solid #e67e22;
+      padding-bottom: 4px;
+    }
 
-body.dark .button {
-  background-color: #34495e;
-  color: white;
-}
+    /* Button */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
 
-.button:hover { filter: brightness(0.9); }
+    body:not(.dark) .button {
+      background-color: #e67e22;
+      color: white;
+    }
 
-.footer {
+    body.dark .button {
+      background-color: #34495e;
+      color: white;
+    }
+
+    .button:hover {
+      filter: brightness(0.9);
+    }
+
+    .footer {
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -102,8 +121,13 @@ body.dark .button {
   border-top: 1px solid rgba(255,255,255,0.15);
 }
 
-/* IMAGE */
-.image-wrapper {
+    img {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+    .image-wrapper {
   position: relative;
   display: inline-block;
 }
@@ -125,10 +149,44 @@ body.dark .button {
   border-radius: 6px;
 }
 
-</style>
-</head>
+#lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
+#lang-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+#lang-toggle-wrapper:hover #lang-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+    #lang-toggle {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+
+  </style>
+</head>
 <body>
+
 
 <div class="content">
 
@@ -139,9 +197,15 @@ body.dark .button {
   <a href="en_contact.html">Contact</a>
 </nav>
 
-<div style="display:flex;justify-content:flex-end;gap:10px;">
-  <button id="theme-toggle" class="button"></button>
-  <button id="lang-toggle" class="button"></button>
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center;">
+  <!-- Teema -->
+  <button id="theme-toggle" class="button">Vaihda teema</button>
+
+  <!-- Kieli -->
+  <div id="lang-toggle-wrapper">
+ <button id="lang-toggle" class="button"></button>
+    <span id="lang-tooltip">Switch language</span>
+  </div>
 </div>
 
 <h1>About me</h1>
@@ -188,40 +252,89 @@ In my free time, I enjoy exercise, outdoor activities and creative projects. Cre
 </div>
 
 <script>
-// DARK MODE
+// Teema
 const toggle = document.getElementById("theme-toggle");
 
-if(localStorage.getItem("darkMode")==="enabled"){
-  document.body.classList.add("dark");
+// Tarkista dark mode
+if(localStorage.getItem("darkMode") === "enabled") { 
+  document.body.classList.add("dark"); 
 }
 
-function updateThemeButton(){
-  if(document.body.classList.contains("dark")){
-    toggle.textContent="Switch to light theme ☀️";
+// Funktio teema-napin tekstille
+function updateThemeButton() {
+  // Selvitetään kieli
+  const currentLang = localStorage.getItem("lang") || (window.location.pathname.split("/").pop().startsWith("en_") ? "en" : "fi");
+
+  if(document.body.classList.contains("dark")) {
+    toggle.textContent = currentLang === "fi" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
   } else {
-    toggle.textContent="Switch to dark theme 🌙";
+    toggle.textContent = currentLang === "fi" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
   }
 }
 
+// Päivitä heti sivulatauksessa
 updateThemeButton();
 
-toggle.addEventListener("click",()=>{
+// Klikattaessa vaihdetaan teema
+toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  localStorage.setItem("darkMode",
-    document.body.classList.contains("dark")?"enabled":"disabled");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
   updateThemeButton();
+});
+
+</script>
+
+<script>
+const currentPage = window.location.pathname.split("/").pop();
+const navLinks = document.querySelectorAll("nav a");
+
+navLinks.forEach(link => {
+  if(link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
+  }
 });
 </script>
 
 <script>
-// LANGUAGE BUTTON
-const langToggle=document.getElementById("lang-toggle");
+const langToggle = document.getElementById("lang-toggle");
 
-langToggle.textContent="🇬🇧 EN | Vaihda suomeksi";
-langToggle.title="Switch website language to Finnish";
+// Sivujen kieliparit
+const langMap = {
+  "index.html": "en_index.html",
+  "about.html": "en_about.html",
+  "projects.html": "en_projects.html",
+  "contact.html": "en_contact.html",
+  "en_index.html": "index.html",
+  "en_about.html": "about.html",
+  "en_projects.html": "projects.html",
+  "en_contact.html": "contact.html"
+};
 
-langToggle.addEventListener("click",()=>{
-  window.location.href="about.html";
+// ⚠️ ERI muuttujan nimi ettei mene päällekkäin
+const pageName = window.location.pathname.split("/").pop();
+
+// Nykyinen kieli
+const pageLang = pageName.startsWith("en_") ? "en" : "fi";
+
+// Päivitä napin teksti
+function updateLangButton() {
+  if(pageLang === "fi") {
+    langToggle.textContent = "🇫🇮 FI | Switch to English";
+    langToggle.title = "Change website language to English";
+  } else {
+    langToggle.textContent = "🇬🇧 EN | Vaihda suomeksi";
+    langToggle.title = "Vaihda sivusto suomen kielelle";
+  }
+}
+
+updateLangButton();
+
+// Klikkaus → vaihda sivu
+langToggle.addEventListener("click", () => {
+  const nextPage = langMap[pageName];
+  if(nextPage) {
+    window.location.href = nextPage;
+  }
 });
 </script>
 
