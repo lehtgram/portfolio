@@ -296,15 +296,15 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Selvitä nykyinen sivu
-const currentPage = window.location.pathname.split("/").pop();
+// ⚠️ ERI muuttujan nimi ettei mene päällekkäin
+const pageName = window.location.pathname.split("/").pop();
 
-// Onko englanti vai suomi
-const currentLang = currentPage.startsWith("en_") ? "en" : "fi";
+// Nykyinen kieli
+const pageLang = pageName.startsWith("en_") ? "en" : "fi";
 
-// Päivitä napin teksti (SELKEÄ VERSIO)
+// Päivitä napin teksti
 function updateLangButton() {
-  if(currentLang === "fi") {
+  if(pageLang === "fi") {
     langToggle.textContent = "🇫🇮 FI | Switch to English";
     langToggle.title = "Change website language to English";
   } else {
@@ -315,9 +315,9 @@ function updateLangButton() {
 
 updateLangButton();
 
-// Klikkaus → vaihda kieli
+// Klikkaus → vaihda sivu
 langToggle.addEventListener("click", () => {
-  const nextPage = langMap[currentPage];
+  const nextPage = langMap[pageName];
   if(nextPage) {
     window.location.href = nextPage;
   }
