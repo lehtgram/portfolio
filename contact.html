@@ -225,6 +225,39 @@ body.dark .button {
   border-radius: 6px;
 }
 
+        #lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#lang-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+#lang-toggle-wrapper:hover #lang-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+    #lang-toggle {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+    
   </style>
 </head>
 <body>
@@ -275,29 +308,36 @@ body.dark .button {
   <hr>
   
 <script>
+// Teema
 const toggle = document.getElementById("theme-toggle");
 
-// Tarkista localStorage kun sivu latautuu
-if(localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark");
+// Tarkista dark mode
+if(localStorage.getItem("darkMode") === "enabled") { 
+  document.body.classList.add("dark"); 
 }
 
-// Aseta nappiin oikea teksti heti sivun latautuessa
-toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
-
-// Napin klikkauksessa vaihdetaan tila ja tallennetaan localStorageen
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+// Funktio teema-napin tekstille
+function updateThemeButton() {
+  // Selvitetään kieli
+  const currentLang = localStorage.getItem("lang") || (window.location.pathname.split("/").pop().startsWith("en_") ? "en" : "fi");
 
   if(document.body.classList.contains("dark")) {
-    localStorage.setItem("darkMode", "enabled");
+    toggle.textContent = currentLang === "fi" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
   } else {
-    localStorage.setItem("darkMode", "disabled");
+    toggle.textContent = currentLang === "fi" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
   }
+}
 
-  // Päivitä nappiin teksti ja emoji
-  toggle.textContent = document.body.classList.contains("dark") ? "Vaihda vaaleaksi ☀️" : "Vaihda tummaksi 🌙";
+// Päivitä heti sivulatauksessa
+updateThemeButton();
+
+// Klikattaessa vaihdetaan teema
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+  updateThemeButton();
 });
+
 </script>
 
 <script>
@@ -311,10 +351,10 @@ navLinks.forEach(link => {
 });
 </script>
 
-  <script>
+<script>
 const langToggle = document.getElementById("lang-toggle");
 
-// Määrittele kieliversioiden URLit
+// Sivujen kieliparit
 const langMap = {
   "index.html": "en_index.html",
   "about.html": "en_about.html",
@@ -326,35 +366,33 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Määrittele liput ja tekstit
-const langLabels = {
-  "fi": "🇫🇮 Suomi",
-  "en": "🇬🇧 English"
-};
+// ⚠️ ERI muuttujan nimi ettei mene päällekkäin
+const pageName = window.location.pathname.split("/").pop();
 
-// Tarkista localStorage kun sivu latautuu
-let savedLang = localStorage.getItem("lang") || "fi";
-updateButton(savedLang);
+// Nykyinen kieli
+const pageLang = pageName.startsWith("en_") ? "en" : "fi";
 
-// Klikattaessa vaihdetaan kieli
+// Päivitä napin teksti
+function updateLangButton() {
+  if(pageLang === "fi") {
+    langToggle.textContent = "🇫🇮 FI | Switch to English";
+    langToggle.title = "Change website language to English";
+  } else {
+    langToggle.textContent = "🇬🇧 EN | Vaihda suomeksi";
+    langToggle.title = "Vaihda sivusto suomen kielelle";
+  }
+}
+
+updateLangButton();
+
+// Klikkaus → vaihda sivu
 langToggle.addEventListener("click", () => {
-  const currentPage = window.location.pathname.split("/").pop();
-  const nextPage = langMap[currentPage];
-
-  if (nextPage) {
-    // Päivitä localStorage ennen sivunvaihtoa
-    const newLang = savedLang === "fi" ? "en" : "fi";
-    localStorage.setItem("lang", newLang);
-
-    // Vaihda sivua
+  const nextPage = langMap[pageName];
+  if(nextPage) {
     window.location.href = nextPage;
   }
 });
 
-// Päivittää napin tekstin/lipun
-function updateButton(lang) {
-  langToggle.textContent = langLabels[lang];
-}
 </script>
 
 </body>
