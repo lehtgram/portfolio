@@ -164,10 +164,14 @@
   <a href="en_contact.html">Contact me</a>
 </nav>
 
-  <button id="lang-toggle" class="button">🇫🇮 Suomi</button>
-
 <button id="theme-toggle" class="button">Switch theme</button>
 
+
+<div id="lang-toggle-wrapper" style="display: inline-block; position: relative; margin-left: 20px;">
+  <button id="lang-toggle" class="button"></button>
+  <span id="lang-tooltip">Vaihda sivun kieli</span>
+</div>
+  
 <h1>Leevi Holmström</h1>
 
   <div class="image-wrapper">
@@ -231,10 +235,10 @@ navLinks.forEach(link => {
 });
 </script>
 
-  <script>
+ <script>
 const langToggle = document.getElementById("lang-toggle");
 
-// Määrittele kieliversioiden URLit
+// Kieliversiot
 const langMap = {
   "index.html": "en_index.html",
   "about.html": "en_about.html",
@@ -246,35 +250,29 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Määrittele liput ja tekstit
+// Napin liput
 const langLabels = {
-  "fi": "🇫🇮 Suomi",
-  "en": "🇬🇧 English"
+  "fi": "🇬🇧 English", // Näytä aina se kieli, johon nappia painamalla mennään
+  "en": "🇫🇮 Suomi"
 };
 
-// Tarkista localStorage kun sivu latautuu
-let savedLang = localStorage.getItem("lang") || "fi";
-updateButton(savedLang);
+// Selvitä nykyinen kieli URL:sta
+const currentPage = window.location.pathname.split("/").pop();
+let savedLang = currentPage.startsWith("en_") ? "en" : "fi";
+
+// Päivitä napin teksti heti
+langToggle.textContent = langLabels[savedLang];
 
 // Klikattaessa vaihdetaan kieli
 langToggle.addEventListener("click", () => {
-  const currentPage = window.location.pathname.split("/").pop();
   const nextPage = langMap[currentPage];
-
-  if (nextPage) {
-    // Päivitä localStorage ennen sivunvaihtoa
-    const newLang = savedLang === "fi" ? "en" : "fi";
-    localStorage.setItem("lang", newLang);
-
-    // Vaihda sivua
+  if(nextPage) {
     window.location.href = nextPage;
   }
 });
 
-// Päivittää napin tekstin/lipun
-function updateButton(lang) {
-  langToggle.textContent = langLabels[lang];
-}
+
+    
 </script>
 
 </body>
