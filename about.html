@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tietoa minusta</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
-
-    /* ========== PERUS RUNKO ========== */
 
     body {
       margin: 0;
@@ -18,13 +16,7 @@
       background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
     }
 
-    .dark {
-      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
-      color: #f5f5f5;
-    }
-
-    /* ========== LASIKORTTI ========== */
-
+    /* Lasikortti */
     .content {
       max-width: 900px;
       margin: 60px auto;
@@ -35,18 +27,42 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     }
 
+    .dark {
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+      color: #f5f5f5;
+    }
+
     .dark .content {
       background: rgba(30,30,30,0.9);
     }
 
-    /* ========== NAVIGAATIO ========== */
+    h1, h2 {
+      color: #34495e;
+    }
 
+    .dark h1, .dark h2 {
+      color: #ffffff;
+    }
+
+    a {
+      color: #e67e22;
+    }
+
+    .dark a {
+      color: #f39c12;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    /* NAV */
     nav {
       display: flex;
       gap: 25px;
       padding-bottom: 15px;
       border-bottom: 1px solid rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     nav a {
@@ -65,26 +81,15 @@
       padding-bottom: 4px;
     }
 
-    /* ========== OTSIKOT ========== */
-
-    h1, h2 {
-      color: #34495e;
-    }
-
-    .dark h1,
-    .dark h2 {
-      color: white;
-    }
-
-    /* ========== BUTTON ========== */
-
+    /* Button */
     .button {
       display: inline-block;
       padding: 10px 20px;
       border-radius: 6px;
-      margin-bottom: 20px;
+      margin-top: 10px;
       transition: 0.3s;
       cursor: pointer;
+      text-decoration: none;
       border: none;
     }
 
@@ -102,18 +107,7 @@
       filter: brightness(0.9);
     }
 
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    hr {
-      margin: 30px 0;
-    }
-
-        .footer {
+    .footer {
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -154,9 +148,42 @@
   border-radius: 6px;
 }
 
+#lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#lang-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+#lang-toggle-wrapper:hover #lang-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+    #lang-toggle {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+
   </style>
 </head>
-
 <body>
 
 <div class="content">
@@ -168,14 +195,15 @@
     <a href="contact.html">Yhteystiedot</a>
   </nav>
 
-<button id="lang-toggle" class="button">🇬🇧 English</button>
-  
-  <button id="theme-toggle" class="button"></button>
+ <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center;">
+  <!-- Teema -->
+  <button id="theme-toggle" class="button">Vaihda teema</button>
 
-  <div class="image-wrapper">
-  <img src="images/me2.jpg"
-       alt="Minä">
-      <span class="watermark">© Leevi</span>
+  <!-- Kieli -->
+  <div id="lang-toggle-wrapper">
+ <button id="lang-toggle" class="button"></button>
+    <span id="lang-tooltip">Switch language</span>
+  </div>
 </div>
 
   <h1>Minusta</h1>
@@ -226,46 +254,53 @@ säilyttämään tasapainon arjessa.
 </div>
 
 <script>
+// Teema
 const toggle = document.getElementById("theme-toggle");
 
-if(localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark");
+// Tarkista dark mode
+if(localStorage.getItem("darkMode") === "enabled") { 
+  document.body.classList.add("dark"); 
 }
 
-function updateButton() {
-  toggle.textContent = document.body.classList.contains("dark")
-    ? "Vaihda vaaleaksi ☀️"
-    : "Vaihda tummaksi 🌙";
-}
-
-updateButton();
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+// Funktio teema-napin tekstille
+function updateThemeButton() {
+  // Selvitetään kieli
+  const currentLang = localStorage.getItem("lang") || (window.location.pathname.split("/").pop().startsWith("en_") ? "en" : "fi");
 
   if(document.body.classList.contains("dark")) {
-    localStorage.setItem("darkMode", "enabled");
+    toggle.textContent = currentLang === "fi" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
   } else {
-    localStorage.setItem("darkMode", "disabled");
+    toggle.textContent = currentLang === "fi" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
   }
+}
 
-  updateButton();
+// Päivitä heti sivulatauksessa
+updateThemeButton();
+
+// Klikattaessa vaihdetaan teema
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+  updateThemeButton();
 });
+
 </script>
 
 <script>
 const currentPage = window.location.pathname.split("/").pop();
-document.querySelectorAll("nav a").forEach(link => {
+const navLinks = document.querySelectorAll("nav a");
+
+navLinks.forEach(link => {
   if(link.getAttribute("href") === currentPage) {
     link.classList.add("active");
   }
 });
 </script>
 
-  <script>
+<script>
 const langToggle = document.getElementById("lang-toggle");
 
-// Määrittele kieliversioiden URLit
+// Sivujen kieliparit
 const langMap = {
   "index.html": "en_index.html",
   "about.html": "en_about.html",
@@ -277,35 +312,32 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Määrittele liput ja tekstit
-const langLabels = {
-  "fi": "🇫🇮 Suomi",
-  "en": "🇬🇧 English"
-};
+// ⚠️ ERI muuttujan nimi ettei mene päällekkäin
+const pageName = window.location.pathname.split("/").pop();
 
-// Tarkista localStorage kun sivu latautuu
-let savedLang = localStorage.getItem("lang") || "fi";
-updateButton(savedLang);
+// Nykyinen kieli
+const pageLang = pageName.startsWith("en_") ? "en" : "fi";
 
-// Klikattaessa vaihdetaan kieli
+// Päivitä napin teksti
+function updateLangButton() {
+  if(pageLang === "fi") {
+    langToggle.textContent = "🇫🇮 FI | Switch to English";
+    langToggle.title = "Change website language to English";
+  } else {
+    langToggle.textContent = "🇬🇧 EN | Vaihda suomeksi";
+    langToggle.title = "Vaihda sivusto suomen kielelle";
+  }
+}
+
+updateLangButton();
+
+// Klikkaus → vaihda sivu
 langToggle.addEventListener("click", () => {
-  const currentPage = window.location.pathname.split("/").pop();
-  const nextPage = langMap[currentPage];
-
-  if (nextPage) {
-    // Päivitä localStorage ennen sivunvaihtoa
-    const newLang = savedLang === "fi" ? "en" : "fi";
-    localStorage.setItem("lang", newLang);
-
-    // Vaihda sivua
+  const nextPage = langMap[pageName];
+  if(nextPage) {
     window.location.href = nextPage;
   }
 });
-
-// Päivittää napin tekstin/lipun
-function updateButton(lang) {
-  langToggle.textContent = langLabels[lang];
-}
 </script>
 
 </body>
