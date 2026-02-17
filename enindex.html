@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leevi Holmström – Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
+    }
+
+    /* Lasikortti */
+    .content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .dark {
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+      color: #f5f5f5;
+    }
+
+    .dark .content {
+      background: rgba(30,30,30,0.9);
+    }
+
+    h1, h2 {
+      color: #34495e;
+    }
+
+    .dark h1, .dark h2 {
+      color: #ffffff;
+    }
+
+    a {
+      color: #e67e22;
+    }
+
+    .dark a {
+      color: #f39c12;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      gap: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: inherit;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #e67e22;
+    }
+
+    nav a.active {
+      border-bottom: 2px solid #e67e22;
+      padding-bottom: 4px;
+    }
+
+    /* Button */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
+
+    body:not(.dark) .button {
+      background-color: #e67e22;
+      color: white;
+    }
+
+    body.dark .button {
+      background-color: #34495e;
+      color: white;
+    }
+
+    .button:hover {
+      filter: brightness(0.9);
+    }
+
+    .footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.dark .footer {
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+    img {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="content">
+
+<nav>
+  <a href="enindex.html">Home page</a>
+  <a href="about.html">About me</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact me</a>
+</nav>
+
+<button id="theme-toggle" class="button">Switch theme</button>
+
+<h1>Leevi Holmström</h1>
+
+  <div class="image-wrapper">
+<img src="images/me.jpg"
+     alt="Me"
+     style="width:100%; height:auto; margin-bottom:20px; border-radius:10px;">
+ <span class="watermark">© Leevi</span>
+</div>
+  
+<p>I am studying to become a Bachelor of Social Services, and my interests focus on human well-being, interaction, and societal phenomena.</p>
+
+<p>In my free time, I work on creative and technical projects such as photography and website development.</p>
+
+<p>This website serves as my personal portfolio: here you can find my introduction, projects, and areas of interest.</p>
+
+
+<hr>
+
+  <footer class="footer">
+  <p>© 2026 Leevi Holmström — All rights reserved.</p>
+</footer>
+
+
+</div>
+
+<script>
+const toggle = document.getElementById("theme-toggle");
+
+// Dark mode tallennus
+if(localStorage.getItem("darkMode") === "enabled") {
+  document.body.classList.add("dark");
+}
+
+toggle.textContent = document.body.classList.contains("dark")
+  ? "Switch light ☀️"
+  : "Switch dark 🌙";
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")) {
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    localStorage.setItem("darkMode", "disabled");
+  }
+
+  toggle.textContent = document.body.classList.contains("dark")
+    ? "Switch light ☀️"
+    : "Switch dark 🌙";
+});
+</script>
+
+<script>
+const currentPage = window.location.pathname.split("/").pop();
+const navLinks = document.querySelectorAll("nav a");
+
+navLinks.forEach(link => {
+  if(link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
+  }
+});
+</script>
+
+</body>
+</html>
