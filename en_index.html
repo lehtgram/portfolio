@@ -151,6 +151,34 @@
   border-radius: 6px;
 }
 
+    #lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#lang-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; /* tooltip napin yläpuolelle */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+#lang-toggle-wrapper:hover #lang-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -164,13 +192,15 @@
   <a href="en_contact.html">Contact me</a>
 </nav>
 
-<button id="theme-toggle" class="button">Switch theme</button>
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+  <button id="theme-toggle" class="button">Switch theme</button>
 
-
-<div id="lang-toggle-wrapper" style="display: inline-block; position: relative; margin-left: 20px;">
-  <button id="lang-toggle" class="button"></button>
-  <span id="lang-tooltip">Vaihda sivun kieli</span>
+  <div id="lang-toggle-wrapper">
+    <button id="lang-toggle" class="button"></button>
+    <span id="lang-tooltip">Vaihda sivun kieli</span>
+  </div>
 </div>
+
   
 <h1>Leevi Holmström</h1>
 
@@ -250,9 +280,9 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Napin liput
+// Näkyvä kieli napissa
 const langLabels = {
-  "fi": "🇬🇧 English", // Näytä aina se kieli, johon nappia painamalla mennään
+  "fi": "🇬🇧 English", 
   "en": "🇫🇮 Suomi"
 };
 
