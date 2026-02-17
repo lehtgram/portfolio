@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About me</title>
+  <title>Leevi Holmström – Portfolio</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
-
-    /* ========== PERUS RUNKO ========== */
-
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
@@ -22,8 +19,6 @@
       background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
       color: #f5f5f5;
     }
-
-    /* ========== LASIKORTTI ========== */
 
     .content {
       max-width: 900px;
@@ -38,8 +33,6 @@
     .dark .content {
       background: rgba(30,30,30,0.9);
     }
-
-    /* ========== NAVIGAATIO ========== */
 
     nav {
       display: flex;
@@ -56,27 +49,11 @@
       transition: 0.2s;
     }
 
-    nav a:hover {
-      color: #e67e22;
-    }
+    nav a:hover { color: #e67e22; }
+    nav a.active { border-bottom: 2px solid #e67e22; padding-bottom: 4px; }
 
-    nav a.active {
-      border-bottom: 2px solid #e67e22;
-      padding-bottom: 4px;
-    }
-
-    /* ========== OTSIKOT ========== */
-
-    h1, h2 {
-      color: #34495e;
-    }
-
-    .dark h1,
-    .dark h2 {
-      color: white;
-    }
-
-    /* ========== BUTTON ========== */
+    h1, h2 { color: #34495e; }
+    .dark h1, .dark h2 { color: white; }
 
     .button {
       display: inline-block;
@@ -88,72 +65,57 @@
       border: none;
     }
 
-    body:not(.dark) .button {
-      background-color: #e67e22;
+    body:not(.dark) .button { background-color: #e67e22; color: white; }
+    body.dark .button { background-color: #34495e; color: white; }
+    .button:hover { filter: brightness(0.9); }
+
+    .image-wrapper { position: relative; display: inline-block; }
+    .image-wrapper img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+    .watermark {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
       color: white;
+      font-size: 14px;
+      opacity: 0.7;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 8px;
+      border-radius: 6px;
     }
 
-    body.dark .button {
-      background-color: #34495e;
-      color: white;
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      text-align: center;
+      opacity: 0.7;
     }
+    .dark .footer { border-top: 1px solid rgba(255,255,255,0.15); }
 
-    .button:hover {
-      filter: brightness(0.9);
+    /* Kielinapin tooltip */
+    #lang-toggle-wrapper { display: inline-block; position: relative; }
+    #lang-tooltip {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 5px 8px;
+      border-radius: 5px;
+      position: absolute;
+      z-index: 10;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.9em;
+      white-space: nowrap;
     }
+    #lang-toggle-wrapper:hover #lang-tooltip { visibility: visible; opacity: 1; }
 
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    hr {
-      margin: 30px 0;
-    }
-
-        .footer {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  font-size: 14px;
-  text-align: center;
-  opacity: 0.7;
-}
-
-.dark .footer {
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-    img {
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
-
-    .image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.image-wrapper img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.watermark {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  color: white;
-  font-size: 14px;
-  opacity: 0.7;
-  background: rgba(0,0,0,0.4);
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
+    /* Yläpaneelin flex */
+    #top-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center; }
   </style>
 </head>
 
@@ -161,144 +123,88 @@
 
 <div class="content">
 
- <nav>
-  <a href="en_index.html">Home page</a>
-  <a href="en_about.html">About me</a>
-  <a href="en_projects.html">Projects</a>
-  <a href="en_contact.html">Contact me</a>
-</nav>
-  
-<button id="lang-toggle" class="button">🇫🇮 Suomi</button>
+  <nav>
+    <a href="en_index.html">Home page</a>
+    <a href="en_about.html">About me</a>
+    <a href="en_projects.html">Projects</a>
+    <a href="en_contact.html">Contact me</a>
+  </nav>
 
-  <button id="theme-toggle" class="button"></button>
+  <div id="top-buttons">
+    <!-- Kieli -->
+    <div id="lang-toggle-wrapper">
+      <button id="lang-toggle" class="button">🇫🇮 Suomi</button>
+      <span id="lang-tooltip">Vaihda sivun kieli</span>
+    </div>
+
+    <!-- Teema -->
+    <button id="theme-toggle" class="button">Switch theme</button>
+  </div>
 
   <div class="image-wrapper">
-  <img src="images/me2.jpg"
-       alt="Me">
-      <span class="watermark">© Leevi</span>
-</div>
+    <img src="images/me.jpg" alt="Me">
+    <span class="watermark">© Leevi</span>
+  </div>
 
-  <h1>About me</h1>
-
-<p>
-I am a social services student with a particular interest in holistic well-being and building safe, trusting interactions. In my work, I strive for calm encounters, active listening, and practical problem-solving.
-</p>
-
-<p>
-I have a prior education in information and communication technology (programming), which has strengthened my ability to utilize digital tools in my work. During my studies, I am focusing especially on mental health and adult social work.
-</p>
-
-<p>
-Additionally, I hold a driving license as well as a valid occupational safety card and hygiene pass.
-</p>
-
-<h2>My Areas of Interest</h2>
-<ul>
-  <li>Supporting mental health and everyday functioning</li>
-  <li>Society, psychology, science, and history</li>
-  <li>Utilizing digital tools in social work</li>
-</ul>
-
-<p>
-I actively develop my skills through independent projects and approach continuous learning with purpose and curiosity.
-</p>
-
-<h2>Free Time</h2>
-<p>
-In my free time, I enjoy exercise, outdoor activities, and creative projects. Creativity, reading, and routines that support recovery help me maintain balance in everyday life.
-</p>
-
+  <h1>Welcome</h1>
+  <p>I am studying to become a Bachelor of Social Services, and my interests focus on human well-being, interaction, and societal phenomena.</p>
+  <p>In my free time, I work on creative and technical projects such as photography and website development.</p>
+  <p>This website serves as my personal portfolio: here you can find my introduction, projects, and areas of interest.</p>
 
   <hr>
 
   <footer class="footer">
-  <p>© 2026 Leevi Holmström — All rights reserved.</p>
-</footer>
-
+    <p>© 2026 Leevi Holmström — All rights reserved.</p>
+  </footer>
 
 </div>
 
 <script>
-const toggle = document.getElementById("theme-toggle");
-
-if(localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark");
-}
-
-function updateButton() {
-  toggle.textContent = document.body.classList.contains("dark")
-         ? "Switch to light theme☀️"
-    : "Switch to dark theme🌙";
-}
-
-updateButton();
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  if(document.body.classList.contains("dark")) {
-    localStorage.setItem("darkMode", "enabled");
-  } else {
-    localStorage.setItem("darkMode", "disabled");
+  // Dark mode
+  const toggle = document.getElementById("theme-toggle");
+  if(localStorage.getItem("darkMode") === "enabled") { document.body.classList.add("dark"); }
+  function updateThemeButton() {
+    toggle.textContent = document.body.classList.contains("dark") ? "Switch to light theme☀️" : "Switch to dark theme🌙";
   }
+  updateThemeButton();
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+    updateThemeButton();
+  });
 
-  updateButton();
-});
-</script>
-
-<script>
-const currentPage = window.location.pathname.split("/").pop();
-document.querySelectorAll("nav a").forEach(link => {
-  if(link.getAttribute("href") === currentPage) {
-    link.classList.add("active");
-  }
-});
-</script>
-
-  <script>
-const langToggle = document.getElementById("lang-toggle");
-
-// Määrittele kieliversioiden URLit
-const langMap = {
-  "index.html": "en_index.html",
-  "about.html": "en_about.html",
-  "projects.html": "en_projects.html",
-  "contact.html": "en_contact.html",
-  "en_index.html": "index.html",
-  "en_about.html": "about.html",
-  "en_projects.html": "projects.html",
-  "en_contact.html": "contact.html"
-};
-
-// Määrittele liput ja tekstit
-const langLabels = {
-  "fi": "🇫🇮 Suomi",
-  "en": "🇬🇧 English"
-};
-
-// Tarkista localStorage kun sivu latautuu
-let savedLang = localStorage.getItem("lang") || "fi";
-updateButton(savedLang);
-
-// Klikattaessa vaihdetaan kieli
-langToggle.addEventListener("click", () => {
+  // Nav active link
   const currentPage = window.location.pathname.split("/").pop();
-  const nextPage = langMap[currentPage];
+  document.querySelectorAll("nav a").forEach(link => {
+    if(link.getAttribute("href") === currentPage) { link.classList.add("active"); }
+  });
 
-  if (nextPage) {
-    // Päivitä localStorage ennen sivunvaihtoa
-    const newLang = savedLang === "fi" ? "en" : "fi";
-    localStorage.setItem("lang", newLang);
+  // Kielinappi
+  const langToggle = document.getElementById("lang-toggle");
+  const langMap = {
+    "index.html": "en_index.html",
+    "about.html": "en_about.html",
+    "projects.html": "en_projects.html",
+    "contact.html": "en_contact.html",
+    "en_index.html": "index.html",
+    "en_about.html": "about.html",
+    "en_projects.html": "projects.html",
+    "en_contact.html": "contact.html"
+  };
+  const langLabels = { "fi": "🇫🇮 Suomi", "en": "🇬🇧 English" };
 
-    // Vaihda sivua
-    window.location.href = nextPage;
-  }
-});
+  // Aseta napin teksti sen mukaan mihin mennään
+  let savedLang = localStorage.getItem("lang") || (currentPage.startsWith("en_") ? "en" : "fi");
+  langToggle.textContent = langLabels[savedLang];
 
-// Päivittää napin tekstin/lipun
-function updateButton(lang) {
-  langToggle.textContent = langLabels[lang];
-}
+  langToggle.addEventListener("click", () => {
+    const nextPage = langMap[currentPage];
+    if(nextPage) {
+      const newLang = savedLang === "fi" ? "en" : "fi";
+      localStorage.setItem("lang", newLang);
+      window.location.href = nextPage;
+    }
+  });
 </script>
 
 </body>
