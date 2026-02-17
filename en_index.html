@@ -156,6 +156,11 @@
   display: inline-block;
 }
 
+#lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 #lang-tooltip {
   visibility: hidden;
   background-color: #333;
@@ -165,7 +170,7 @@
   border-radius: 5px;
   position: absolute;
   z-index: 10;
-  bottom: 125%; /* tooltip napin yläpuolelle */
+  bottom: 125%; 
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
@@ -178,6 +183,7 @@
   visibility: visible;
   opacity: 1;
 }
+
 
   </style>
 </head>
@@ -192,14 +198,17 @@
   <a href="en_contact.html">Contact me</a>
 </nav>
 
-<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center;">
+  <!-- Teema -->
   <button id="theme-toggle" class="button">Switch theme</button>
 
+  <!-- Kieli -->
   <div id="lang-toggle-wrapper">
     <button id="lang-toggle" class="button"></button>
     <span id="lang-tooltip">Vaihda sivun kieli</span>
   </div>
 </div>
+
 
   
 <h1>Leevi Holmström</h1>
@@ -280,7 +289,7 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Näkyvä kieli napissa
+// Näkyvä kieli napissa: aina se johon mennään
 const langLabels = {
   "fi": "🇬🇧 English", 
   "en": "🇫🇮 Suomi"
@@ -288,10 +297,10 @@ const langLabels = {
 
 // Selvitä nykyinen kieli URL:sta
 const currentPage = window.location.pathname.split("/").pop();
-let savedLang = currentPage.startsWith("en_") ? "en" : "fi";
+let currentLang = currentPage.startsWith("en_") ? "en" : "fi";
 
-// Päivitä napin teksti heti
-langToggle.textContent = langLabels[savedLang];
+// Päivitä napin teksti
+langToggle.textContent = langLabels[currentLang];
 
 // Klikattaessa vaihdetaan kieli
 langToggle.addEventListener("click", () => {
@@ -300,6 +309,7 @@ langToggle.addEventListener("click", () => {
     window.location.href = nextPage;
   }
 });
+
 
 
     
