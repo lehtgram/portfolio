@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About me</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ========== PERUS RUNKO ========== */
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
+    }
+
+    .dark {
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+      color: #f5f5f5;
+    }
+
+    /* ========== LASIKORTTI ========== */
+
+    .content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .dark .content {
+      background: rgba(30,30,30,0.9);
+    }
+
+    /* ========== NAVIGAATIO ========== */
+
+    nav {
+      display: flex;
+      gap: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: inherit;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #e67e22;
+    }
+
+    nav a.active {
+      border-bottom: 2px solid #e67e22;
+      padding-bottom: 4px;
+    }
+
+    /* ========== OTSIKOT ========== */
+
+    h1, h2 {
+      color: #34495e;
+    }
+
+    .dark h1,
+    .dark h2 {
+      color: white;
+    }
+
+    /* ========== BUTTON ========== */
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    body:not(.dark) .button {
+      background-color: #e67e22;
+      color: white;
+    }
+
+    body.dark .button {
+      background-color: #34495e;
+      color: white;
+    }
+
+    .button:hover {
+      filter: brightness(0.9);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+        .footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.dark .footer {
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+    img {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+  </style>
+</head>
+
+<body>
+
+<div class="content">
+
+ <nav>
+  <a href="enindex.html">Home page</a>
+  <a href="enabout.html">About me</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact me</a>
+</nav>
+
+  <button id="theme-toggle" class="button"></button>
+
+  <div class="image-wrapper">
+  <img src="images/me2.jpg"
+       alt="Me">
+      <span class="watermark">© Leevi</span>
+</div>
+
+  <h1>About me</h1>
+
+<p>
+I am a social services student with a particular interest in holistic well-being and building safe, trusting interactions. In my work, I strive for calm encounters, active listening, and practical problem-solving.
+</p>
+
+<p>
+I have a prior education in information and communication technology (programming), which has strengthened my ability to utilize digital tools in my work. During my studies, I am focusing especially on mental health and adult social work.
+</p>
+
+<p>
+Additionally, I hold a driving license as well as a valid occupational safety card and hygiene pass.
+</p>
+
+<h2>My Areas of Interest</h2>
+<ul>
+  <li>Supporting mental health and everyday functioning</li>
+  <li>Society, psychology, science, and history</li>
+  <li>Utilizing digital tools in social work</li>
+</ul>
+
+<p>
+I actively develop my skills through independent projects and approach continuous learning with purpose and curiosity.
+</p>
+
+<h2>Free Time</h2>
+<p>
+In my free time, I enjoy exercise, outdoor activities, and creative projects. Creativity, reading, and routines that support recovery help me maintain balance in everyday life.
+</p>
+
+
+  <hr>
+
+  <footer class="footer">
+  <p>© 2026 Leevi Holmström — All rights reserved.</p>
+</footer>
+
+
+</div>
+
+<script>
+const toggle = document.getElementById("theme-toggle");
+
+if(localStorage.getItem("darkMode") === "enabled") {
+  document.body.classList.add("dark");
+}
+
+function updateButton() {
+  toggle.textContent = document.body.classList.contains("dark")
+      ? "Switch light ☀️"
+  : "Switch dark 🌙";
+}
+
+updateButton();
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")) {
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    localStorage.setItem("darkMode", "disabled");
+  }
+
+  updateButton();
+});
+</script>
+
+<script>
+const currentPage = window.location.pathname.split("/").pop();
+document.querySelectorAll("nav a").forEach(link => {
+  if(link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
+  }
+});
+</script>
+
+</body>
+</html>
+
