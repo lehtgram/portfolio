@@ -151,7 +151,7 @@
   border-radius: 6px;
 }
 
- #lang-toggle-wrapper {
+#lang-toggle-wrapper {
   position: relative;
   display: inline-block;
 }
@@ -165,7 +165,7 @@
   border-radius: 5px;
   position: absolute;
   z-index: 10;
-  bottom: 125%;
+  bottom: 125%; 
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
@@ -194,12 +194,17 @@
 </nav>
 
 
-    <button id="theme-toggle" class="button"></button>
+ <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center;">
+  <!-- Teema -->
+  <button id="theme-toggle" class="button">Vaihda teema</button>
 
-<div id="lang-toggle-wrapper" style="display: inline-block; position: relative; margin-left: 20px;">
-  <button id="lang-toggle" class="button"></button>
-  <span id="lang-tooltip">Vaihda sivun kieli</span>
+  <!-- Kieli -->
+  <div id="lang-toggle-wrapper">
+    <button id="lang-toggle" class="button">Loading...</button>
+    <span id="lang-tooltip">Switch language</span>
+  </div>
 </div>
+
 
 
 
@@ -229,17 +234,14 @@
 <script>
 const toggle = document.getElementById("theme-toggle");
 
+// Dark mode tallennus
 if(localStorage.getItem("darkMode") === "enabled") {
   document.body.classList.add("dark");
 }
 
-function updateButton() {
-  toggle.textContent = document.body.classList.contains("dark")
-    ? "Vaihda vaaleaksi ☀️"
-    : "Vaihda tummaksi 🌙";
-}
-
-updateButton();
+toggle.textContent = document.body.classList.contains("dark")
+   ? "Switch to light theme☀️"
+    : "Switch to dark theme🌙";
 
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
@@ -250,44 +252,59 @@ toggle.addEventListener("click", () => {
     localStorage.setItem("darkMode", "disabled");
   }
 
-  updateButton();
+  toggle.textContent = document.body.classList.contains("dark")
+   ? "Vaihda vaaleaksi☀️"
+    : "Vaihda tummaksi🌙";
 });
 </script>
 
 <script>
-const langToggle = document.getElementById("lang-toggle");
-
-// Kieliversiot
-const langMap = {
-  "index.html": "en_index.html",
-  "about.html": "en_about.html",
-  "projects.html": "en_projects.html",
-  "contact.html": "en_contact.html",
-  "en_index.html": "index.html",
-  "en_about.html": "about.html",
-  "en_projects.html": "projects.html",
-  "en_contact.html": "contact.html"
-};
-
-// Napin liput
-const langLabels = {
-  "fi": "🇬🇧 English", // Näytä aina se kieli, johon nappia painamalla mennään
-  "en": "🇫🇮 Suomi"
-};
-
-// Selvitä nykyinen kieli URL:sta
 const currentPage = window.location.pathname.split("/").pop();
-let savedLang = currentPage.startsWith("en_") ? "en" : "fi";
+const navLinks = document.querySelectorAll("nav a");
 
-// Päivitä napin teksti heti
-langToggle.textContent = langLabels[savedLang];
-
-// Klikattaessa vaihdetaan kieli
-langToggle.addEventListener("click", () => {
-  const nextPage = langMap[currentPage];
-  if(nextPage) {
-    window.location.href = nextPage;
+navLinks.forEach(link => {
+  if(link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
   }
+});
+</script>
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const langToggle = document.getElementById("lang-toggle");
+
+  // Kieliversiot
+  const langMap = {
+    "index.html": "en_index.html",
+    "about.html": "en_about.html",
+    "projects.html": "en_projects.html",
+    "contact.html": "en_contact.html",
+    "en_index.html": "index.html",
+    "en_about.html": "about.html",
+    "en_projects.html": "projects.html",
+    "en_contact.html": "contact.html"
+  };
+
+  // Näkyvä kieli napissa: aina se, johon mennään
+  const langLabels = {
+    "fi": "🇬🇧 English",
+    "en": "🇫🇮 Suomi"
+  };
+
+  // Selvitä nykyinen sivu ja kieli
+  const currentPage = window.location.pathname.split("/").pop();
+  let currentLang = currentPage.startsWith("en_") ? "en" : "fi";
+
+  // Päivitä napin teksti
+  langToggle.textContent = langLabels[currentLang];
+
+  // Vaihda kieli klikkauksella
+  langToggle.addEventListener("click", () => {
+    const nextPage = langMap[currentPage];
+    if (nextPage) {
+      window.location.href = nextPage;
+    }
+  });
 });
 
 
@@ -297,6 +314,7 @@ langToggle.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
