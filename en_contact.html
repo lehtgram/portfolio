@@ -328,9 +328,9 @@ function updateThemeButton() {
   const currentLang = localStorage.getItem("lang") || (window.location.pathname.split("/").pop().startsWith("en_") ? "en" : "fi");
 
   if(document.body.classList.contains("dark")) {
-    toggle.textContent = currentLang === "fi" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
+    toggle.textContent = currentLang === "en" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
   } else {
-    toggle.textContent = currentLang === "fi" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
+    toggle.textContent = currentLang === "en" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
   }
 }
 
