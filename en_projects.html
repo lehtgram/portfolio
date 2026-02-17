@@ -182,6 +182,45 @@
   letter-spacing: 0.3px;
 }
 
+    /* PROJECT CARDS */
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark .project-card {
+  background: rgba(40,40,40,0.8);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+/* KUVA KORTISSA */
+.project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  object-fit: cover;
+}
+
+    .project-card h3 {
+  margin-top: 5px;
+}
+
 
   </style>
 </head>
