@@ -271,10 +271,16 @@ body.dark .button {
   <a href="en_contact.html">Contact me</a>
 </nav>
 
-  <button id="lang-toggle" class="button">🇫🇮 Suomi</button>
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; align-items: center;">
+  <!-- Teema -->
+  <button id="theme-toggle" class="button">Vaihda teema</button>
 
-<!-- Dark mode -nappi -->
-<button id="theme-toggle" class="button">Switch to dark theme 🌙</button>
+  <!-- Kieli -->
+  <div id="lang-toggle-wrapper">
+ <button id="lang-toggle" class="button"></button>
+    <span id="lang-tooltip">Switch language</span>
+  </div>
+</div>
 
     <div class="image-wrapper">
 <img src="images/autumn.jpg">
