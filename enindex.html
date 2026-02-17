@@ -200,8 +200,8 @@ if(localStorage.getItem("darkMode") === "enabled") {
 }
 
 toggle.textContent = document.body.classList.contains("dark")
-  ? "Switch light ☀️"
-  : "Switch dark 🌙";
+   ? "Switch to light theme☀️"
+    : "Switch to dark theme🌙";
 
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
@@ -213,8 +213,8 @@ toggle.addEventListener("click", () => {
   }
 
   toggle.textContent = document.body.classList.contains("dark")
-    ? "Switch light ☀️"
-    : "Switch dark 🌙";
+   ? "Switch to light theme☀️"
+    : "Switch to dark theme🌙";
 });
 </script>
 
