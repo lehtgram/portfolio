@@ -151,10 +151,34 @@
   border-radius: 6px;
 }
 
-    #lang-toggle-wrapper:hover #lang-tooltip {
+ #lang-toggle-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#lang-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+#lang-toggle-wrapper:hover #lang-tooltip {
   visibility: visible;
   opacity: 1;
 }
+
 
   </style>
 </head>
@@ -173,26 +197,11 @@
   
 <button id="theme-toggle" class="button">Vaihda teema</button>
 
-  <div id="lang-toggle-wrapper" style="display: inline-block; position: relative;">
-  <button id="lang-toggle" class="button">🇬🇧 English</button>
-  <span id="lang-tooltip" style="
-    visibility: hidden;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 5px 8px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 10;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 0.9em;
-    white-space: nowrap;
-  ">Vaihda sivun kieli</span>
+<div id="lang-toggle-wrapper" style="display: inline-block; position: relative; margin-left: 20px;">
+  <button id="lang-toggle" class="button"></button>
+  <span id="lang-tooltip">Vaihda sivun kieli</span>
 </div>
+
 
 
 <h1>Leevi Holmström</h1>
@@ -220,47 +229,9 @@
 </div>
 
 <script>
-const toggle = document.getElementById("theme-toggle");
-
-// Dark mode tallennus
-if(localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark");
-}
-
-toggle.textContent = document.body.classList.contains("dark")
-  ? "Vaihda vaaleaksi ☀️"
-  : "Vaihda tummaksi 🌙";
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  if(document.body.classList.contains("dark")) {
-    localStorage.setItem("darkMode", "enabled");
-  } else {
-    localStorage.setItem("darkMode", "disabled");
-  }
-
-  toggle.textContent = document.body.classList.contains("dark")
-    ? "Vaihda vaaleaksi ☀️"
-    : "Vaihda tummaksi 🌙";
-});
-</script>
-
-<script>
-const currentPage = window.location.pathname.split("/").pop();
-const navLinks = document.querySelectorAll("nav a");
-
-navLinks.forEach(link => {
-  if(link.getAttribute("href") === currentPage) {
-    link.classList.add("active");
-  }
-});
-</script>
-
-  <script>
 const langToggle = document.getElementById("lang-toggle");
 
-// Kieliversioiden URLit
+// Kieliversiot
 const langMap = {
   "index.html": "en_index.html",
   "about.html": "en_about.html",
@@ -272,31 +243,27 @@ const langMap = {
   "en_contact.html": "contact.html"
 };
 
-// Liput ja napin tekstit
+// Napin liput
 const langLabels = {
-  "fi": "🇫🇮 Suomi",
-  "en": "🇬🇧 English"
+  "fi": "🇬🇧 English", // Näytä aina se kieli, johon nappia painamalla mennään
+  "en": "🇫🇮 Suomi"
 };
 
-// Lue tallennettu kieli localStoragesta
-let savedLang = localStorage.getItem("lang") || "fi";
-updateLangButton(savedLang);
+// Selvitä nykyinen kieli URL:sta
+const currentPage = window.location.pathname.split("/").pop();
+let savedLang = currentPage.startsWith("en_") ? "en" : "fi";
+
+// Päivitä napin teksti heti
+langToggle.textContent = langLabels[savedLang];
 
 // Klikattaessa vaihdetaan kieli
 langToggle.addEventListener("click", () => {
-  const currentPage = window.location.pathname.split("/").pop();
   const nextPage = langMap[currentPage];
   if(nextPage) {
-    const newLang = savedLang === "fi" ? "en" : "fi";
-    localStorage.setItem("lang", newLang);
     window.location.href = nextPage;
   }
 });
 
-// Päivitä napin teksti
-function updateLangButton(lang) {
-  langToggle.textContent = langLabels[lang];
-}
 
     
 </script>
@@ -304,6 +271,7 @@ function updateLangButton(lang) {
 
 </body>
 </html>
+
 
 
 
