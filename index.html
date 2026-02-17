@@ -194,8 +194,7 @@
 </nav>
 
 
-  
-<button id="theme-toggle" class="button">Vaihda teema</button>
+    <button id="theme-toggle" class="button"></button>
 
 <div id="lang-toggle-wrapper" style="display: inline-block; position: relative; margin-left: 20px;">
   <button id="lang-toggle" class="button"></button>
@@ -227,6 +226,33 @@
 
 
 </div>
+<script>
+const toggle = document.getElementById("theme-toggle");
+
+if(localStorage.getItem("darkMode") === "enabled") {
+  document.body.classList.add("dark");
+}
+
+function updateButton() {
+  toggle.textContent = document.body.classList.contains("dark")
+    ? "Vaihda vaaleaksi ☀️"
+    : "Vaihda tummaksi 🌙";
+}
+
+updateButton();
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")) {
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    localStorage.setItem("darkMode", "disabled");
+  }
+
+  updateButton();
+});
+</script>
 
 <script>
 const langToggle = document.getElementById("lang-toggle");
@@ -271,6 +297,7 @@ langToggle.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
