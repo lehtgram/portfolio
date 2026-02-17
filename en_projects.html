@@ -171,12 +171,13 @@ body.dark .button { background-color: #34495e; color: white; }
 <div class="content">
 
  <nav>
-  <a href="enindex.html">Home page</a>
-  <a href="enabout.html">About me</a>
-  <a href="enprojects.html">Projects</a>
-  <a href="encontact.html">Contact me</a>
+  <a href="en_index.html">Home page</a>
+  <a href="en_about.html">About me</a>
+  <a href="en_projects.html">Projects</a>
+  <a href="en_contact.html">Contact me</a>
 </nav>
 
+<button id="lang-toggle" class="button">🇫🇮 Suomi</button>
 
   <!-- Dark mode -nappi -->
   <button id="theme-toggle" class="button"></button>
@@ -238,6 +239,52 @@ const currentPage = window.location.pathname.split("/").pop();
 document.querySelectorAll("nav a").forEach(link => {
   if(link.getAttribute("href") === currentPage) link.classList.add("active");
 });
+</script>
+
+  <script>
+const langToggle = document.getElementById("lang-toggle");
+
+// Määrittele kieliversioiden URLit
+const langMap = {
+  "index.html": "en_index.html",
+  "about.html": "en_about.html",
+  "projects.html": "en_projects.html",
+  "contact.html": "en_contact.html",
+  "en_index.html": "index.html",
+  "en_about.html": "about.html",
+  "en_projects.html": "projects.html",
+  "en_contact.html": "contact.html"
+};
+
+// Määrittele liput ja tekstit
+const langLabels = {
+  "fi": "🇫🇮 Suomi",
+  "en": "🇬🇧 English"
+};
+
+// Tarkista localStorage kun sivu latautuu
+let savedLang = localStorage.getItem("lang") || "fi";
+updateButton(savedLang);
+
+// Klikattaessa vaihdetaan kieli
+langToggle.addEventListener("click", () => {
+  const currentPage = window.location.pathname.split("/").pop();
+  const nextPage = langMap[currentPage];
+
+  if (nextPage) {
+    // Päivitä localStorage ennen sivunvaihtoa
+    const newLang = savedLang === "fi" ? "en" : "fi";
+    localStorage.setItem("lang", newLang);
+
+    // Vaihda sivua
+    window.location.href = nextPage;
+  }
+});
+
+// Päivittää napin tekstin/lipun
+function updateButton(lang) {
+  langToggle.textContent = langLabels[lang];
+}
 </script>
 
 </body>
