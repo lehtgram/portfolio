@@ -17,8 +17,9 @@ body {
   font-family: 'Roboto', system-ui, -apple-system,
                "Segoe UI Emoji", "Apple Color Emoji",
                "Noto Color Emoji", sans-serif;
-
-    }
+  line-height: 1.6;
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
+}
 
     /* Lasikortti */
     .content {
@@ -248,13 +249,16 @@ if(localStorage.getItem("darkMode") === "enabled") {
 
 // Funktio teema-napin tekstille
 function updateThemeButton() {
-  // Selvitetään kieli
-  const currentLang = localStorage.getItem("lang") || (window.location.pathname.split("/").pop().startsWith("en_") ? "en" : "fi");
+  const currentLang = pageName.startsWith("en_") ? "en" : "fi";
 
   if(document.body.classList.contains("dark")) {
-    toggle.textContent = currentLang === "en" ? "Vaihda vaaleaan teema☀️" : "Switch to light theme☀️";
+    toggle.textContent = currentLang === "fi"
+      ? "Vaihda vaaleaan teemaan ☀️"
+      : "Switch to light theme ☀️";
   } else {
-    toggle.textContent = currentLang === "en" ? "Vaihda tummaan teema🌙" : "Switch to dark theme🌙";
+    toggle.textContent = currentLang === "fi"
+      ? "Vaihda tummaan teemaan 🌙"
+      : "Switch to dark theme 🌙";
   }
 }
 
@@ -329,6 +333,7 @@ langToggle.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
