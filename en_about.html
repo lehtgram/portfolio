@@ -334,10 +334,17 @@ updateLangButton();
 // Klikkaus → vaihda sivu
 langToggle.addEventListener("click", () => {
   const nextPage = langMap[pageName];
+
   if(nextPage) {
+
+    // ⭐ TALLENNETAAN VALITTU KIELI
+    const nextLang = nextPage.startsWith("en_") ? "en" : "fi";
+    localStorage.setItem("lang", nextLang);
+
     window.location.href = nextPage;
   }
 });
+  
 </script>
 
 </body>
